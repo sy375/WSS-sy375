@@ -1,0 +1,4071 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    179031,       4063]
+NotebookOptionsPosition[    175948,       3981]
+NotebookOutlinePosition[    176291,       3996]
+CellTagsIndexPosition[    176248,       3993]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"visualnumb", "[", "a_", "]"}], ":=", "\[IndentingNewLine]", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"nonlinear", "[", "taps_", "]"}], ":=", "\[IndentingNewLine]", 
+      RowBox[{"(", 
+       RowBox[{"taps", " ", ";", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"k", "[", "x_", "]"}], " ", ":=", 
+         RowBox[{"Values", "[", 
+          RowBox[{"Counts", "[", 
+           RowBox[{"Partition", "[", 
+            RowBox[{
+             RowBox[{"ShiftRegisterSequence", "[", 
+              RowBox[{"{", 
+               RowBox[{"a", ",", "taps", ",", 
+                RowBox[{
+                 RowBox[{"#", "/.", 
+                  RowBox[{"AssociationThread", "[", 
+                   RowBox[{
+                    RowBox[{"Tuples", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1"}], "}"}], ",", "3"}], "]"}], 
+                    "\[Rule]", " ", "x"}], "]"}]}], "&"}]}], "}"}], "]"}], 
+             ",", "a", ",", "1"}], "]"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"maxseqgen", ":=", " ", 
+         RowBox[{"Select", "[", 
+          RowBox[{
+           RowBox[{"Tuples", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "1"}], "}"}], ",", "8"}], "]"}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"k", "[", "#", "]"}], " ", "\[Equal]", " ", 
+             RowBox[{"PadLeft", "[", 
+              RowBox[{
+               RowBox[{"{", "}"}], ",", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"2", "^", "a"}], ")"}], "-", "a"}], ",", "1"}], 
+              "]"}]}], "&"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"m", " ", "=", " ", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", 
+             ",", "1"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "0", ",", "1", ",", "0", ",", "1", ",", "0", 
+             ",", "1"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "0", ",", "1", ",", "1", ",", "0", ",", "0", ",", "1", 
+             ",", "1"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "1", ",", "1", 
+             ",", "1"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", 
+             ",", "1"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", 
+             ",", "1"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", 
+             ",", "1"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+             ",", "1"}], "}"}]}], "}"}]}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"nonlinearcasefeed", ":=", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"Mod", "[", 
+              RowBox[{
+               RowBox[{"#", ".", "m"}], ",", "2"}], "]"}], "&"}], "/@", 
+            RowBox[{"(", 
+             RowBox[{"Cases", "[", 
+              RowBox[{
+               RowBox[{"Values", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Solve", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    "n", ",", "x", ",", "y", ",", "z", ",", "xy", ",", "yz", 
+                    ",", "zx", ",", "xyz"}], "}"}], ".", "m"}], " ", 
+                    "\[Equal]", " ", "#"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "n", ",", "x", ",", "y", ",", "z", ",", "xy", ",", "yz", 
+                    ",", "zx", ",", "xyz"}], "}"}], ",", 
+                    RowBox[{"Modulus", "\[Rule]", "2"}]}], "]"}], "&"}], "/@", 
+                 RowBox[{"(", "maxseqgen", ")"}]}], "]"}], ",", 
+               RowBox[{"Except", "[", 
+                RowBox[{"{", 
+                 RowBox[{"{", 
+                  RowBox[{
+                  "_", ",", "_", ",", "_", ",", "_", ",", "0", ",", "0", ",", 
+                   "0", ",", "0"}], "}"}], "}"}], "]"}]}], "]"}], ")"}]}], 
+           ",", "1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"image", "[", "feed_", "]"}], " ", ":=", " ", 
+         RowBox[{"Labeled", "[", 
+          RowBox[{
+           RowBox[{"Image", "[", 
+            RowBox[{
+             RowBox[{"Partition", "[", 
+              RowBox[{
+               RowBox[{"ShiftRegisterSequence", "[", 
+                RowBox[{"{", 
+                 RowBox[{"a", ",", "taps", ",", 
+                  RowBox[{
+                   RowBox[{"#", "/.", 
+                    RowBox[{"AssociationThread", "[", 
+                    RowBox[{
+                    RowBox[{"Tuples", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1"}], "}"}], ",", "3"}], "]"}], 
+                    "\[Rule]", " ", "feed"}], "]"}]}], "&"}]}], "}"}], "]"}], 
+               ",", "a"}], "]"}], ",", 
+             RowBox[{"Magnification", "\[Rule]", "4"}]}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"taps", ",", 
+             RowBox[{"Flatten", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], "*", "1"}], "+", 
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}], "*", "x"}], "+", 
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "3", 
+                    "\[RightDoubleBracket]"}], "*", "y"}], "+", 
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "4", 
+                    "\[RightDoubleBracket]"}], "*", "z"}], "+", 
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "5", 
+                    "\[RightDoubleBracket]"}], "*", "xy"}], "+", 
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "6", 
+                    "\[RightDoubleBracket]"}], "*", "yz"}], "+", 
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "7", 
+                    "\[RightDoubleBracket]"}], "*", "zx"}], "+", 
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "8", 
+                    "\[RightDoubleBracket]"}], "*", "xyz"}]}], ")"}], "&"}], "/@", 
+                  RowBox[{"Values", "[", 
+                   RowBox[{"Solve", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    "n", ",", "x", ",", "y", ",", "z", ",", "xy", ",", "yz", 
+                    ",", "zx", ",", "xyz"}], "}"}], ".", "m"}], " ", 
+                    "\[Equal]", " ", "#"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "n", ",", "x", ",", "y", ",", "z", ",", "xy", ",", "yz", 
+                    ",", "zx", ",", "xyz"}], "}"}], ",", 
+                    RowBox[{"Modulus", "\[Rule]", "2"}]}], "]"}], "]"}]}], 
+                 "&"}], "/@", 
+                RowBox[{"{", "feed", "}"}]}], ",", "1"}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"image", "/@", "nonlinearcasefeed"}]}], ")"}]}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{
+       RowBox[{"nonlinear", "/@", 
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"Permutations", "[", 
+           RowBox[{
+            RowBox[{"Range", "[", "a", "]"}], ",", 
+            RowBox[{"{", "3", "}"}]}], "]"}], ",", "OrderedQ"}], "]"}]}], ",",
+        "1"}], "]"}]}], ")"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7075836056657395`*^9, 3.7075836088043566`*^9}, {
+   3.7075839055716753`*^9, 3.7075839212418184`*^9}, {3.707583965248704*^9, 
+   3.707584103623402*^9}, 3.7075841870069237`*^9, {3.7075844405074797`*^9, 
+   3.7075844566933336`*^9}, {3.7075846629615936`*^9, 
+   3.7075846890707984`*^9}, {3.707584963331775*^9, 3.7075849984375677`*^9}, {
+   3.707585091541244*^9, 3.707585155171842*^9}, 3.7075855154520693`*^9, {
+   3.707585581691848*^9, 3.707585584035637*^9}, {3.7075856154828434`*^9, 
+   3.7075856234527283`*^9}, {3.707585792758927*^9, 3.7075858025280533`*^9}, {
+   3.7075865703818874`*^9, 3.707586571941148*^9}, {3.7075866296140714`*^9, 
+   3.7075866372225065`*^9}, {3.7075867059736137`*^9, 
+   3.7075867069119205`*^9}, {3.707586753193556*^9, 3.7075867619546804`*^9}, {
+   3.707587213694064*^9, 3.7075872156771183`*^9}, {3.7075878575912347`*^9, 
+   3.707587943237606*^9}, {3.7075880046073837`*^9, 3.7075880163320813`*^9}, {
+   3.7075880634975667`*^9, 3.707588092768654*^9}, {3.707588154042053*^9, 
+   3.7075882087087755`*^9}, {3.7075884043127565`*^9, 
+   3.707588406495967*^9}},ExpressionUUID->"888a2913-6f59-4db2-a9be-\
+9e56018f7b7a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"visualnumb", "[", "3", "]"}]], "Input",
+ CellChangeTimes->{{3.7075884555524354`*^9, 
+  3.7075884589897385`*^9}},ExpressionUUID->"6e138255-7d1d-46e1-b465-\
+157357f15516"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 0.}, {1., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"xy", "+", "xyz", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 0.}, {1., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 0.}, {1., 1., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"xyz", "+", "y", "+", "yz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {0., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "xyz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {0., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xyz", "+", "yz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "yz", "+", "z", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {1., 0., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "xyz", "+", "y", "+", "yz", "+", "z"}], 
+       "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "xyz", "+", "y", "+", "z", "+", "zx"}], 
+       "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {0., 1., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xyz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {0., 1., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "yz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {0., 1., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xyz", "+", "yz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 0.}, {1., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "yz", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 0.}, {1., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xyz", "+", "yz", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {0., 1., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {0., 1., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "xyz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {0., 1., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "xyz", "+", "yz", "+", "z"}], 
+       "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {0., 1., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "yz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 0.}, {1., 1., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "xyz", "+", "yz", "+", "zx"}], 
+       "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 0.}, {1., 1., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "y", "+", "yz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xyz", "+", "y", "+", "yz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 0., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xyz", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xyz", "+", "y", "+", "yz", "+", "z", "+", "zx"}], 
+       "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "y", "+", "yz", "+", "z", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {0., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "y", "+", "yz", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {0., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xyz", "+", "y", "+", "yz", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "xyz", "+", "y", "+", "yz", "+", "z"}], 
+       "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "y", "+", "yz", "+", "z", "+", "zx"}], 
+       "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "xyz", "+", "y", "+", "z", "+", "zx"}], 
+       "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "y", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {1., 0., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "xyz", "+", "y", "+", "yz", "+", "zx"}], 
+       "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "xyz", "+", "y"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "xyz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 0., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "yz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 0., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "xyz", "+", "yz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "xyz", "+", "z", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xyz", "+", "yz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xyz", "+", "z", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1.}, {1., 1., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "yz", "+", "z", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xyz", "+", "yz", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {1., 0., 1.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1.}, {1., 0., 0.}}], {{0, 2}, {3, 0}}, {0.,
+         1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {3, 2}, PlotRange -> {{0, 3}, {0, 2}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "yz"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.7075884596411657`*^9},ExpressionUUID->"c0cbe1e1-54c7-41b5-96c0-\
+f58e055a2ef3"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"visualnumb", "[", "4", "]"}]], "Input",
+ CellChangeTimes->{{3.7075884405367775`*^9, 
+  3.7075884459746017`*^9}},ExpressionUUID->"d0448bbd-7ca8-4169-8e7e-\
+fd55172ffd7e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 0., 1.}, {1., 0., 1., 0.}, {0., 1., 1., 
+         1.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 1.}, {0., 1., 0., 1.}, {1., 1., 1., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1., 0.}, {1., 0., 1., 1.}, {1., 1., 0., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "xyz", "+", "yz", "+", "zx"}], 
+       "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 1.}, {1., 0., 0., 1.}, {0., 1., 0., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xyz", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 1.}, {1., 1., 0., 0.}, {1., 0., 1., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 1.}, {1., 0., 1., 0.}, {0., 1., 0., 
+         1.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 0., 0.}, {1., 1., 0., 1.}, {1., 1., 0., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1., 1.}, {0., 1., 1., 0.}, {0., 1., 0., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 0.}, {1., 1., 1., 1.}, {0., 1., 0., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "xyz", "+", "yz", "+", "z"}], 
+       "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 1.}, {1., 1., 0., 1.}, {0., 0., 1., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xyz", "+", "yz", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1., 1.}, {1., 0., 0., 1.}, {0., 1., 1., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 0.}, {1., 0., 0., 1.}, {1., 1., 1., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 1.}, {1., 1., 0., 1.}, {0., 1., 1., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1., 1.}, {1., 0., 1., 0.}, {1., 1., 0., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "xyz", "+", "y", "+", "yz", "+", "zx"}], 
+       "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 1.}, {0., 1., 0., 0.}, {1., 0., 1., 
+         1.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1., 1.}, {1., 0., 0., 1.}, {0., 1., 1., 
+         0.}}], {{0, 3}, {4, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {4, 3}, PlotRange -> {{0, 4}, {0, 3}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xyz", "+", "yz", "+", "zx"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.7075884470604124`*^9},ExpressionUUID->"e4178c5e-8138-4554-93bf-\
+6dd28c3cc33c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"visualnumb", "[", "5", "]"}]], "Input",
+ CellChangeTimes->{{3.7075884659503803`*^9, 
+  3.7075884686695914`*^9}},ExpressionUUID->"8db96748-95d2-487e-b48c-\
+b40e96751f9f"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 1., 1.}, {0., 1., 0., 0., 1.}, {1., 0.,
+          0., 1., 0.}, {0., 0., 1., 0., 1.}, {0., 1., 1., 1., 1.}, {1., 0., 
+         0., 0., 0.}}], {{0, 6}, {5, 0}}, {0., 1.}, ColorFunction -> 
+        GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {5, 6}, PlotRange -> {{0, 5}, {0, 6}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 1., 1.}, {1., 1., 0., 0., 0.}, {1., 0.,
+          1., 1., 0.}, {0., 1., 1., 0., 1.}, {1., 1., 0., 1., 0.}, {1., 0., 
+         0., 0., 0.}}], {{0, 6}, {5, 0}}, {0., 1.}, ColorFunction -> 
+        GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {5, 6}, PlotRange -> {{0, 5}, {0, 6}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 0., 1., 0.}, {1., 1., 1., 0., 1.}, {0., 0.,
+          1., 1., 0.}, {1., 1., 0., 0., 1.}, {0., 0., 0., 1., 1.}, {1., 1., 
+         1., 0., 0.}}], {{0, 6}, {5, 0}}, {0., 1.}, ColorFunction -> 
+        GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {5, 6}, PlotRange -> {{0, 5}, {0, 6}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 1., 1.}, {1., 0., 1., 0., 1.}, {0., 0.,
+          0., 1., 0.}, {1., 1., 0., 0., 1.}, {0., 0., 1., 1., 0.}, {1., 1., 
+         1., 0., 0.}}], {{0, 6}, {5, 0}}, {0., 1.}, ColorFunction -> 
+        GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {5, 6}, PlotRange -> {{0, 5}, {0, 6}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 1., 1., 1., 1.}, {1., 0., 0., 0., 1.}, {0., 0.,
+          1., 1., 0.}, {1., 1., 0., 0., 1.}, {0., 1., 1., 1., 0.}, {1., 0., 
+         1., 0., 0.}}], {{0, 6}, {5, 0}}, {0., 1.}, ColorFunction -> 
+        GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {5, 6}, PlotRange -> {{0, 5}, {0, 6}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "5"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 1., 1.}, {0., 1., 1., 0., 0.}, {1., 0.,
+          0., 1., 1.}, {0., 1., 0., 0., 0.}, {1., 0., 1., 0., 1.}, {1., 1., 
+         1., 0., 0.}}], {{0, 6}, {5, 0}}, {0., 1.}, ColorFunction -> 
+        GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {5, 6}, PlotRange -> {{0, 5}, {0, 6}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "5"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 0., 1.}, {0., 1., 1., 1., 0.}, {1., 1.,
+          0., 0., 1.}, {1., 0., 1., 0., 0.}, {0., 1., 1., 1., 1.}, {1., 0., 
+         0., 0., 0.}}], {{0, 6}, {5, 0}}, {0., 1.}, ColorFunction -> 
+        GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {5, 6}, PlotRange -> {{0, 5}, {0, 6}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "4", ",", "5"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[
+       RawArray["Real64",{{0., 0., 1., 1., 1.}, {1., 1., 0., 1., 0.}, {1., 0.,
+          0., 0., 1.}, {0., 0., 1., 1., 0.}, {0., 1., 0., 1., 1.}, {1., 0., 
+         0., 0., 0.}}], {{0, 6}, {5, 0}}, {0., 1.}, ColorFunction -> 
+        GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {5, 6}, PlotRange -> {{0, 5}, {0, 6}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "4", ",", "5"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.707588470301848*^9},ExpressionUUID->"980df01a-eae0-4abb-8d64-\
+e081a19630a8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"visualnumb", "[", "6", "]"}]], "Input",
+ CellChangeTimes->{{3.707588484435144*^9, 
+  3.7075884884121737`*^9}},ExpressionUUID->"023a0c18-f5fe-4bf5-8381-\
+1b0bf97aa11a"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSJILiEFCqOCDPYYQ
+Vnl0Gpc8IXMI8YlVR6z5xLqfECDkT2LDh1j3E9KP21wAyKIt7w==
+        "], {{0, 10}, {6, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {6, 10}, PlotRange -> {{0, 6}, {0, 10}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSJILiEFC2MEHe+Jo
+QuoJmU+svbj0ETKHEJ9Y84g1n9hwIFaekP2E/QUAcHAswA==
+        "], {{0, 10}, {6, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {6, 10}, PlotRange -> {{0, 6}, {0, 10}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSJILiEFCqOCDPXF8
+QuLo8rjMI9YeQvbiAsTqI+QuYv1NrP241BEChMIF0z4AMEct7w==
+        "], {{0, 10}, {6, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {6, 10}, PlotRange -> {{0, 6}, {0, 10}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "5"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSJILiEFC2MEHe+Jo
+dPW4+ITEcdlLrDghQMg8Yt1LrLsImUOsfmLDHbc6AAjaLMA=
+        "], {{0, 10}, {6, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {6, 10}, PlotRange -> {{0, 6}, {0, 10}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "5"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSJILiEFCqOCDPYYQ
+ijix8ujqCOknZA4h84k1j1j3oqsjxCdWHSHzibWf2PBmYAAAaRct7w==
+        "], {{0, 10}, {6, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {6, 10}, PlotRange -> {{0, 6}, {0, 10}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSJILiEFC2MEHe/w0
+LvXEmodLH7Hm4+ITEifWPmLtJzaciA0/YsORkH6EOgB6eizA
+        "], {{0, 10}, {6, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {6, 10}, PlotRange -> {{0, 6}, {0, 10}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "4"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSJILiEFCqOCDPWk0
+IUBIHSHzcMkT6x5c+oi1n1h9hNxJyDxC5hJyL24+ADBHLe8=
+        "], {{0, 10}, {6, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {6, 10}, PlotRange -> {{0, 6}, {0, 10}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "6"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSJILiEFC2MEHe/w0
+IXWEzMMlT6x7cOkj1n5i9eEyh1h3EesvYu3BZT5u/wEA/woswA==
+        "], {{0, 10}, {6, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {6, 10}, PlotRange -> {{0, 6}, {0, 10}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "6"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSJILiEFCqOCDPXY+
+LhqXPkLmErIPl/3E6sOln1jzcQFC4UGsecS6h1h/4ZJnYAAA92gt7w==
+        "], {{0, 10}, {6, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {6, 10}, PlotRange -> {{0, 6}, {0, 10}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "4", ",", "5"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSJILiEFC2MEHe+w0
+LnXEmkOsPC77CaknBIi1h1j3EbKfWH3EhiMucdz+AACNaizA
+        "], {{0, 10}, {6, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {6, 10}, PlotRange -> {{0, 6}, {0, 10}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "4", ",", "5"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSJILiEFCqOCDPWk0
+Lv3EmotLnpB+QoCQ+YTcQax5hNxHrPnEmkNsOCDkAZfdLe8=
+        "], {{0, 10}, {6, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {6, 10}, PlotRange -> {{0, 6}, {0, 10}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "5", ",", "6"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSJILiEFC2MEHe1Sa
+kDgu/cSai0uekDsIAWLdT6z5xOoj1p+4ALH+JxxeAJd0LMA=
+        "], {{0, 10}, {6, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {6, 10}, PlotRange -> {{0, 6}, {0, 10}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "5", ",", "6"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.707588492658387*^9},ExpressionUUID->"18609dad-3098-4f51-ac09-\
+229d2c464cb9"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"visualnumb", "[", "7", "]"}]], "Input",
+ CellChangeTimes->{{3.707584073366558*^9, 3.707584074990057*^9}, {
+  3.707588414287715*^9, 
+  3.707588414859446*^9}},ExpressionUUID->"531e4610-e4dd-4e32-8f09-\
+d3ab56f3d8e9"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIIiNkZcIEP9sTR
+6OoJAUL6CZlLrH5S7SHWnYTcRax5xPqTWHOIdSchQGy4EiuPSx2p7iBkDqnx
+RGr4kupOQvYT6z5S8yFhAAB8dlKp
+        "], {{0, 18}, {7, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {7, 18}, PlotRange -> {{0, 7}, {0, 18}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIIiNkZcIEP9uTR
+xAJ09aSaS6w4qfpJtYdYdxJyF6nhSap5hAAhdxIbP6S6m1h3EOseUs0hpJ7U
+eCXWvaTKE8snDAB8DVF6
+        "], {{0, 18}, {7, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {7, 18}, PlotRange -> {{0, 7}, {0, 18}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIIiNkZ0MEHe/L4
+6DSx8rjUkeouQuaR6i9C7sJlPrHuJyRPyHxSwwOXucTaT8gcUv1Hqr2k+ptU
+d5Pqf1LVEXIXseaTmi4wAQBFM1PY
+        "], {{0, 18}, {7, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {7, 18}, PlotRange -> {{0, 7}, {0, 18}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "6"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIIiNkZcIEP9qTR
+6PqI5eOyl1h3ESuPi0/IPEL6SXUXIUDI/cT6j1h7CJlPrH9IjQ9C6ogNX1LD
+m1RzSY03XOKkpltS0wHx7gUAyn5SqQ==
+        "], {{0, 18}, {7, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {7, 18}, PlotRange -> {{0, 7}, {0, 18}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "6"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIIiNkZ0MEHe/Jo
+YgGx6ok1H5c6Ut1LrDix9pFqLi55Yt1NyF5S44vU8CTW34TkSTWf1HgjZA+x
+7iU1Poi1l9RwJTXcGRgAYwhT2A==
+        "], {{0, 18}, {7, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {7, 18}, PlotRange -> {{0, 7}, {0, 18}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "7"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIIiNkZcIEP9sTR
+xKon1nxc6ggBYt1FyFxixUkNB1yAVP+TGp7E6ifkPkL24JIn1XxC5pDqH1LD
+g9R0S8heYuVJdRep+Q0BAMh/Uqk=
+        "], {{0, 18}, {7, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {7, 18}, PlotRange -> {{0, 7}, {0, 18}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "3", ",", "7"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIIiNkZcIEP9uTx
+0Wli5XHZj0sdIfNxqSNWPbHuJdU/xMoTcgex/idkH6nxTMgcUtMJqeYR6y5C
+6khNJ7jESfU/IUBsvJMa3wgAAPZKUXo=
+        "], {{0, 18}, {7, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {7, 18}, PlotRange -> {{0, 7}, {0, 18}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "6", ",", "7"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "x", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIIiNkZcIEP9uTR
+6PqJ5eOyn1T3EVJHyHxc6ohVjwuQ6k5C7iA1PHHZR6w7SA0vQuYR6y5S45VY
+daSmY1L9Sao7iTWX1PDEBAC/4lKp
+        "], {{0, 18}, {7, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {7, 18}, PlotRange -> {{0, 7}, {0, 18}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "6", ",", "7"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.707585744598342*^9, 3.707587036339923*^9, 3.707587261762662*^9, 
+   3.7075879606106215`*^9, 3.7075880367053223`*^9, {3.707588080405484*^9, 
+   3.7075881327338314`*^9}, 3.707588173582404*^9, {3.707588204103034*^9, 
+   3.7075882261755743`*^9}, 
+   3.707588428808247*^9},ExpressionUUID->"03a811b8-eb64-44a1-b165-\
+f0b78b051070"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"visualnumb", "[", "8", "]"}]], "Input",
+ CellChangeTimes->{{3.7075884952025847`*^9, 
+  3.7075884986895013`*^9}},ExpressionUUID->"3d04c3f1-6d72-48f7-b66a-\
+d5be7c7c56f3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIeiEHyqOCDPYYQ
+UeKEaFzqCQFC6okVJ9VdxLqTXHly3UFqOBBSR2r4EauPkP8I2UfIXFLdQa55
+pIY/uembVEBq/iI1/ZDrX3Ljg5A7CJlDLp/U9EpqOiU1nxNrLrGA3PRBbjzg
+sp/c9EcIkFvfkJsOya3viAWk2vPBHgDZiZ53
+        "], {{0, 31}, {8, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {8, 31}, PlotRange -> {{0, 8}, {0, 31}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "6"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIeiEHy2MEHe/Jo
+XPoJiRMCuNQT6x5y3UXIncT6g9TwIjXcyA1PYt1BKFxIVUdIHy73EmsfqeFF
+brohZB4uQKq/yU0/5IYHseLE+pvUfE9qfJCa7ohVR2q8kmoOueFCSJ7c8CM3
+Xgm5h1hzyM0XhOwj13xC4uSGGyFAvD8Ag66dSA==
+        "], {{0, 31}, {8, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {8, 31}, PlotRange -> {{0, 8}, {0, 31}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "6"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIeiEHyqOCDPYYQ
+Vnly1eHiEzKXkD5y3Umquwi5l1j7CNlLrDuINYeQ/eT6H5d5xIoTK0+s+eSm
+O3LtI5VPrj5i7Sc2PgmZT657SE2vpOYXYvUTm14JqSe3vCLVfFLzGan2EOsO
+QubiModU+wmZT8geQu7CBUgtx8hVT8g95OZTTPMAcM+edw==
+        "], {{0, 31}, {8, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {8, 31}, PlotRange -> {{0, 8}, {0, 31}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "4", ",", "5"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIeiEHy2MEHe+Jo
+QvoJAULm4jKHVPsJmU/IHkLuIjd8yA0nXPLkqidWnFh/E5tuiA03UtXh4hMy
+l5A+ct1JqrtwAXLDn5B+cu0l1h2EzCPWfnLzNbnuJbe8Izcdkxtv5OYHcu0n
+ZA+x5pPrHkKA3PxJbn1ArD2EAOnmAgAMlJ1I
+        "], {{0, 31}, {8, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {8, 31}, PlotRange -> {{0, 8}, {0, 31}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "4", ",", "5"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIeiEHyqOCDPWU0
+sQBdPbn2ELKXkD2E7CcEiHUPqeYT619iw4fUcCPWPYTUkRrPhMwlxCc1vZBq
+LrH60AEhf5IaLqTGK7npg9R0QsgdhNxFbv4h1f3EyhOrHpc+Ys0jVR+59hEC
+5KZPcsOfVHcQ6x5C6gjZQ266IVY9ufUppjgAn6Sedw==
+        "], {{0, 31}, {8, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {8, 31}, PlotRange -> {{0, 8}, {0, 31}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "4", ",", "8"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIeiEHy2MEHe+Jo
+dPWkAlzmkGoPIfvJ9QcudcSaT8idxJpLrDnE+pOQPlLdQ6q55KYfUs0hNx7I
+DT9CgNz0QWq6JzW+iY0vctMLqemK3PAmt9wg1t+EzCNVH7n2kRtvxAJyw5dc
+eVLdgUue3HAgt9wkFpCbvgjTAC4enUg=
+        "], {{0, 31}, {8, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {8, 31}, PlotRange -> {{0, 8}, {0, 31}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "4", ",", "8"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIeiEHyqOCDPYYQ
+iji6PKniuOwhVj0umlj1uAAu9xAyl5A5hMwnN1xxAWLDidTwIdUeUuOLWPOJ
+tZ9cc3GpIxWQ625S0w8h+8l1DyF7CKkjNz2Taz8ueVLdRa59pLqLVHFy8zUh
+QG74kBtvpLqDXP8Tax+59R0h9eTmB1LdycAAAAhtnnc=
+        "], {{0, 31}, {8, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {8, 31}, PlotRange -> {{0, 8}, {0, 31}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "5", ",", "6"}], "}"}],RowBox[{"{", 
+       RowBox[{"x", "+", "xy", "+", "y", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )], ",", 
+   TemplateBox[{GraphicsBox[
+      TagBox[
+       RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBbCBOamKOmUkqSFIeiEHy2MEHe/w0
+IX2EALnm4lJHyL3E6icW4DIPF59Y9cS6h5A9hNSRaj+p/sQlTq59uNQTax+5
+8UKsOCFAbrrFpZ/UfEaIT647iAXkxhMu9aSaT6q7CNlPrjpSyylS/UWuOLnh
+QAiQW76TW94Qkic3XZOb7sjNp7jkMWkApTidSA==
+        "], {{0, 31}, {8, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+       BoxForm`ImageTag[
+       "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+        4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+      ImageSizeRaw -> {8, 31}, PlotRange -> {{0, 8}, {0, 31}}, ImageSize -> 
+      Magnification[4]],RowBox[{"{", 
+       RowBox[{"1", ",", "5", ",", "6"}], "}"}],RowBox[{"{", 
+       RowBox[{"1", "+", "xy", "+", "z"}], "}"}]},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {2, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", 
+         RowBox[{"{", 
+           RowBox[{#2, ",", #3}], "}"}], ",", 
+         RowBox[{"{", 
+           RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.7075885413617134`*^9},ExpressionUUID->"668c8cda-a0eb-405d-bcbb-\
+19a097960e6e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"visualnumb", "[", "9", "]"}]], "Input",
+ CellChangeTimes->{{3.707588722200631*^9, 
+  3.7075887270338907`*^9}},ExpressionUUID->"76906d6e-c359-4d9b-a50c-\
+fc7f9c37a237"],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{
+  3.707588926775663*^9},ExpressionUUID->"ee03edab-ed46-48a6-bc09-\
+37e05c153dd3"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"visualnumb", "[", "10", "]"}]], "Input",
+ CellChangeTimes->{{3.707590126449952*^9, 
+  3.707590136993453*^9}},ExpressionUUID->"b3a9c6d3-0870-4dc1-9fca-\
+48f9e34d6257"],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{
+  3.7075905218493643`*^9},ExpressionUUID->"848f5380-c5cc-44ab-bf4b-\
+837e030bc6b0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"visualnumb", "[", "11", "]"}]], "Input",
+ CellChangeTimes->{{3.7075915391191936`*^9, 
+  3.7075915422147264`*^9}},ExpressionUUID->"f0c1a84d-4bd3-4f0d-ae67-\
+36653ef86e68"],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{
+  3.7075926667036333`*^9},ExpressionUUID->"329c2b30-f73f-4c27-9099-\
+9f9b44d15195"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"visualnumb", "[", "12", "]"}]], "Input",
+ CellChangeTimes->{{3.707592967387677*^9, 
+  3.707592970082312*^9}},ExpressionUUID->"f674202b-5187-4b32-9612-\
+66d10df033eb"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ImagePartition", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Image", "[", "#", "]"}], "&"}], "/@", 
+       RowBox[{"Partition", "[", 
+        RowBox[{
+         RowBox[{"Partition", "[", 
+          RowBox[{
+           RowBox[{"ShiftRegisterSequence", "[", 
+            RowBox[{"{", 
+             RowBox[{"12", ",", 
+              RowBox[{"{", 
+               RowBox[{"1", ",", "5", ",", "8"}], "}"}], ",", 
+              RowBox[{
+               RowBox[{"Mod", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                  "#", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}],
+                   "+", 
+                  RowBox[{
+                  "#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}],
+                   "+", 
+                  RowBox[{
+                  "#", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}],
+                   "+", 
+                  RowBox[{
+                   RowBox[{
+                   "#", "\[LeftDoubleBracket]", "3", 
+                    "\[RightDoubleBracket]"}], "*", 
+                   RowBox[{
+                   "#", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}]}]}], ",", "2"}], "]"}], "&"}]}],
+              "}"}], "]"}], ",", "12"}], "]"}], ",", "40"}], "]"}]}], "//", 
+      "ImageAssemble"}], ",", 
+     RowBox[{"Scaled", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"1", "/", "8"}], ",", "1"}], "}"}], "]"}]}], "]"}], "//", 
+   "Grid"}], "//", "Rasterize"}]], "Input",
+ CellChangeTimes->{{3.7081815693948464`*^9, 3.708181677978052*^9}, {
+   3.7081817729287305`*^9, 3.7081817784142523`*^9}, {3.7081818706340833`*^9, 
+   3.708181885514866*^9}, {3.708181936026335*^9, 3.708181973932649*^9}, {
+   3.7081820319039598`*^9, 3.7081820347908745`*^9}, 3.7081821345788965`*^9, {
+   3.708182183905735*^9, 3.7081823208434887`*^9}, {3.7081823627813535`*^9, 
+   3.7081823752929525`*^9}, {3.708182440956314*^9, 3.708182546537924*^9}, {
+   3.7081825821407785`*^9, 3.7081825826612277`*^9}, {3.708182734822666*^9, 
+   3.708182737755004*^9}, {3.7081827715150585`*^9, 3.708182794021674*^9}, {
+   3.7081828806672864`*^9, 3.708182895129869*^9}, {3.7081829958502836`*^9, 
+   3.7081830759014235`*^9}},ExpressionUUID->"b50e6c8c-3b0d-4bdb-ba03-\
+6c44e2b7bf0d"],
+
+Cell[BoxData[
+ GraphicsBox[RasterBox[CompressedData["
+1:eJztk9GNG0kQQwVcJPd74TgEJ3AhXahtHwwYI5JV9ar1ZWAb2MVo1GSxSOrv
+7/9++/7X6/X65+fffz///n8+X+frfJ0/8Pz68T7/+7cjXKh+HTjdBVRiCNtT
+wChDrv2+zAU8J1ZLjQLiAxQgsitC93mlMBYDptxUi6dzVwkJxWmJbPGNKJdx
+LoYoj5WohB1rzlYktKWRsWVwnq1XjUsEGB8IVVx2JcOVO5u74aE3/BUJFFkB
+x9V8u9VcnyLrcw2V5q0G2WXsBhzUVPcunZVC762oGk809uK3IxCye/Xz4ZoF
+wn9WDomnwUJ/qinjjq7KaUd4JOEnDh15XnUViYbXe4uiCUS5X/M4Tgp0q9Af
+SDdGngv4RTN72orBr4mZFwL46Eqzl8T7wxvobSHFIzwcGE0egb+ft8UWKvcT
+QlzAqpkxR9nxrj/NIALvi0Hg1Xawmc7DBcSVfYsG/uSRl/AISTShEUwWrN7z
+dE7hMF/Wt4DiYzTNav3Qa80+Gjpf6XdhLpjIe9lZMbjOi27Ejz1cVjjv9kLg
+SV3a6q+S4lhi4Mpb2fEko1ZSZTvosFsqK4/KYyt4OoJy/n56ZBvhPW30xOUR
+he4kTNaVwLnV/U/M4a0Q8TIdwo85Ly+3AqKMaKk/9ArPe1LR7VGh3+fTnbAH
+ninNVUbng8V9HGGQPpyUtd88y2Rdoaw5MsRDGOSC2wvTcfH8voyOH3u48GwF
+SLJywQc5qh9BZPfYuB3fVDQT2RHVv18RcgGn6Amx7nknBtekE7/1Ec48AuOC
+vfgKKz5UhM3os8/FIdHGHt68hN14yohfncmlcYQDocIIvDDZxcB8j0VcaYNK
+VhAR+Vz/LPM9FkQkWS3ohNf2jmIqoMsg2GYWFF9lsSrny45o6IEnhTgmArVF
+whVqlHRNclg3xKKnhnGu5wuL8RzRZzFiI8+x9ONLGNmrPhAo0+HQhmSbzif5
+ipiV+IaKMESe/iVMdrRxrF/j8Gp6BBKX/A7fPWpYMVQRk/VdwxPSpAwVCpvQ
+8gb6RluGY4bwbrjgVb5x3Cjec9l2MoqsIn6OgNud9xRiVYhCf998GxnuWlFJ
+5euLhotO9m/GuZKXKBHaVYWqC1WvKrjXA/bKP8btGoYKBbGVVxxelRNaF0dH
+Y1fyjrnR79swVCK5AMloBJ53PyMWdvvDdEgWzWg/IkOeLxT6OJE9Lijvt/7E
+FRqsM0STIQPcd9R/cL7ifDQ/XiPGOqSZ3isUYSuLqiJtGWLK1zJWzYxzoXui
+XMirxEXzuJTwc5Fes6p4DVbEw3Rc/KoeHiIvgzD4UlCAKHfCioTbe943JUAf
+URUPHjcZVisW47pafPSoYURVN3tJ24D6ehC41xXaK9cuqsXHEYYV1jM95kAP
+FyqBRAb3alR4Vw/hvyiwXF657fbKRqN4n8LhjRgivloh+n9nbDOUiJRcXCRZ
+zdWu7I2Wcm+340aR3rdRtlx2T0Snw5spUe0WPmom50OfD/b2FB6u4I3nfPqx
+CPo3/Li8FacvWBE28CrQkSFCZK9RgDyQuc5QJTVivVonheI3VzqrjAgwDl01
+Tbz1l81oV75KNvaBrCAXHE7E+0RnkCmrTCs3tunEvUZ/epKVhmOe8HzFZz46
+dvv5cYWtxMT325TlI2nvMYtWcM9xZU6cBbeOc3mdmol3zjuk8oQvGEMhqmSu
+SPWvqunnPaAtw/Oh6smFBj69gnOsPGwj+Dp/4vkBo203VA==
+   "], {{0, 0}, {159, 42}}, {0, 255},
+   ColorFunction->RGBColor],
+  ImageSize->{614., 172.},
+  PlotRange->{{0, 159}, {0, 42}}]], "Output",
+ CellChangeTimes->{{3.7081816296340337`*^9, 3.7081816785104856`*^9}, 
+   3.708181773460244*^9, {3.708181875503417*^9, 3.7081818811607447`*^9}, {
+   3.7081819390313406`*^9, 3.7081819743619585`*^9}, 3.708182035326268*^9, 
+   3.7081821351639776`*^9, 3.708182191297823*^9, {3.7081822654115553`*^9, 
+   3.7081823100995116`*^9}, 3.7081823692182436`*^9, {3.7081824574322786`*^9, 
+   3.708182534139989*^9}, 3.708182583163331*^9, {3.70818277887352*^9, 
+   3.708182794623273*^9}, {3.7081830286642876`*^9, 
+   3.70818307635542*^9}},ExpressionUUID->"a7c4dc76-78da-4c56-b46d-\
+fa39251220c5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Labeled", "[", 
+  RowBox[{
+   RowBox[{"Image", "[", 
+    RowBox[{
+     RowBox[{"Partition", "[", 
+      RowBox[{
+       RowBox[{"ShiftRegisterSequence", "[", 
+        RowBox[{"{", 
+         RowBox[{"12", ",", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", "5", ",", "8"}], "}"}], ",", 
+          RowBox[{
+           RowBox[{"Mod", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+              "#", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+              "+", 
+              RowBox[{
+              "#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
+              "+", 
+              RowBox[{
+              "#", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}], 
+              "+", 
+              RowBox[{
+               RowBox[{
+               "#", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}], 
+               "*", 
+               RowBox[{
+               "#", "\[LeftDoubleBracket]", "2", 
+                "\[RightDoubleBracket]"}]}]}], ",", "2"}], "]"}], "&"}]}], 
+         "}"}], "]"}], ",", "12"}], "]"}], ",", 
+     RowBox[{"Magnification", "\[Rule]", "4"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "5", ",", "8"}], "}"}], ",", 
+     RowBox[{"x", "+", "xy", "+", "y", "+", "z"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7081814192182217`*^9, 3.708181425686892*^9}, {
+  3.7081814963935785`*^9, 
+  3.708181556080282*^9}},ExpressionUUID->"9cb21156-6b04-4302-91a7-\
+a4a932fe8700"],
+
+Cell[BoxData[
+ TemplateBox[{GraphicsBox[
+    TagBox[
+     RasterBox[CompressedData["
+1:eJy1VjuOVDEQHAgQAZfgDogUcYVFHGCQlggJaQkQt+YIsOmDUn3dwa5s96ee
+3V01b798f/j68na7/Xj998/D/efHp6f7r0+vnheP92/v3z0+H35+cbu9uV3t
+94d/tv5ryO+6j9buPqrj5lNxsnoqDpZHxefiUfOp38P+p7hUfOl3pnlX3+3i
+dfdX39H2kYqv7UPVTs0X82f7qzlK+8+NY6byPcPT8nXLw24dt256T8hanUn7
+MOVxFx/yY/Fpvuu5uo9sxdNqPKq/4oOUB9u5TPG4fYHytjrZ6pe7bnW+5SVm
+7v1d1yt9Sfk65Y21Pq10puVLlFf1a3m41YVTc5HqoOq30r92vld61vI9w6Pm
+afkB5WG24rG031t8bH/9fazOSm/TOUr1iuFb8Vo6Z6u+QX4rfm/nl/mreFR/
+dM7slG64fdNae3/uO6B8Ll60ZnVSvkj7I+WBdq7YuftOaL/VabcespVepXkY
+znRu27lazecKv7rv+rn10n5QLdX5FI+rJ6heisPlgfY+1/OQ1r+ep/EsDuVR
+/RmO9P3VNcuHrNW/dh7ad1Zxun4tDzB/Fw/yS/u37XO2z/C0/Jnqj1t/PZfM
+D9lKX1t+XNVrebfN4+pWyrcrnlbzuucrvnX785R+MT+Gx72PdK5T/j2lt+v+
+dm2tQ6lOo3i2r9Zd8UTa92x/dd76rX4frPVoxTNqnVQnUpwqLuaX5m3PWX1m
+q35J30+tk+JY1UGW6sHqnlZ93PI1y5ues/rM0u9c93erg209lR/XOuT6t+/F
+8Kbn7veo9VZ6yeqk+VgetnZ5oOXlVZ+qON33X/Vr+s7qeevn9oPrd/V3ca11
+K8WH/Nc86tZl+yrelA/VOi4PsX01T3tPa2vnOeU59x5Vc/kO4WLxK15n+Zg/
+imf1kanv2faBi4fVQXHtO6F8ahzK4+Jcf0+Kj8W1PJr2OfJHtuqftB9VW/UX
+w7N6J7df2H57v6nuqnhcS3m+5deU79h5OkduHuTP/Ni6rXeK19w5Zn5u3fbd
+0vm4WjonaD+dP4QL2UoHUj5n8Snvq3ldfOm9pPrY1lvHp3y7+v6Ux1c42L4b
+n/qnvMJsNW8tf6j7p3RPrdfWb3GktrrXtl/culd/F1f6Hu19X/Ox/O18n/re
+lD/ZfnoP6Tyl/KriUuNUXO47uriYf4uTWfuuLi8zHCyvi7vtg3Qf+bXfkepf
+i4/lXfURw+Naeu+u39XfxbXuf1ZXPV/3hbu/nsf2O67rNc+m8+VaOq8pfoaD
+4UP+rU4xf4a31Rf3vZkfq5PmU/MiS/EwfK3OrfRNrZviSHXVxYH803NWn/m5
+vKTGpzrZ3sOaV1Z9fApn+34MD7J1X6vvekrPXHyrfmjfG9mpOWH50v5f8cmK
+r1WcaL+ty+oxP5cP3DwojuVT99W8aj33nNVR41bx7rum84Bwpf3e8sIqX6qb
+aj5maZwa3/IWy4fytLyT9kPb3yv+aPW65UEXH/Jn8et7YdbyyUoPWX31vNXV
+dD6Yn4ov7feW7xhOFt/iTXVrzfNu3XR/pden+K7tt5UusfqndJXFsX2GA52v
+dJXFtfO10mO1Tsobbb+5eFGe1D/lqVYHUT7mr+JR/dU8Kz1Rz1Pducav+36l
+52jN9tV8KW53HtR8DK+LB9VN16x+W3fVj2jN8q3yrN+VWYrXxbHiQ2ZpnBqv
+6tOp72N43Xyn+NvVYYRnpVNsveJ5tGb11LruvbZ6g2zVH60euDjdvOkcr+dA
+tfW8oPNW31M/Fdep+WvzXfeRP7OV/qS/G9a4Wl5Y4VP9Unyp/p3iIWaneNP1
+T/Mwc+8Txbl8ka5RvlZP0r5iedL7deux+iwureeeY/sDoKOA6A==
+      "], {{0, 341}, {12, 0}}, {0., 1.}, ColorFunction -> GrayLevel], 
+     BoxForm`ImageTag[
+     "Real", ColorSpace -> Automatic, Interleaving -> None, Magnification -> 
+      4], Selectable -> False], DefaultBaseStyle -> "ImageGraphics", 
+    ImageSizeRaw -> {12, 341}, PlotRange -> {{0, 12}, {0, 341}}, ImageSize -> 
+    Magnification[4]],RowBox[{"{", 
+     RowBox[{"1", ",", "5", ",", "8"}], "}"}],
+   RowBox[{"x", "+", "xy", "+", "y", "+", "z"}]},
+  "Labeled",
+  DisplayFunction->(GridBox[{{
+      ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}, {
+      TagBox[
+       ItemBox[
+        PaneBox[
+         TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+         BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+       "SkipImageSizeLevel"]}, {
+      ItemBox[#3, DefaultBaseStyle -> "LabeledLabel"]}}, 
+    GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+    AutoDelete -> False, 
+    GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+    BaselinePosition -> {2, 1}]& ),
+  InterpretationFunction->(RowBox[{"Labeled", "[", 
+     RowBox[{#, ",", 
+       RowBox[{"{", 
+         RowBox[{#2, ",", #3}], "}"}], ",", 
+       RowBox[{"{", 
+         RowBox[{"Top", ",", "Bottom"}], "}"}]}], "]"}]& )]], "Output",
+ CellChangeTimes->{{3.708181534775877*^9, 
+  3.708181537978636*^9}},ExpressionUUID->"43cdb180-f868-4f83-bce2-\
+edacb4420bde"]
+}, Open  ]]
+},
+WindowSize->{1264, 637},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (April 18, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 10071, 233, 411, "Input", "ExpressionUUID" -> \
+"888a2913-6f59-4db2-a9be-9e56018f7b7a"],
+Cell[CellGroupData[{
+Cell[10654, 257, 193, 4, 30, "Input", "ExpressionUUID" -> \
+"6e138255-7d1d-46e1-b465-157357f15516"],
+Cell[10850, 263, 69928, 1566, 353, "Output", "ExpressionUUID" -> \
+"c0cbe1e1-54c7-41b5-96c0-f58e055a2ef3"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[80815, 1834, 193, 4, 30, "Input", "ExpressionUUID" -> \
+"d0448bbd-7ca8-4169-8e7e-fd55172ffd7e"],
+Cell[81011, 1840, 24285, 537, 121, "Output", "ExpressionUUID" -> \
+"e4178c5e-8138-4554-93bf-6dd28c3cc33c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[105333, 2382, 193, 4, 30, "Input", "ExpressionUUID" -> \
+"8db96748-95d2-487e-b48c-b40e96751f9f"],
+Cell[105529, 2388, 12946, 286, 75, "Output", "ExpressionUUID" -> \
+"980df01a-eae0-4abb-8d64-e081a19630a8"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[118512, 2679, 191, 4, 30, "Input", "ExpressionUUID" -> \
+"023a0c18-f5fe-4bf5-8381-1b0bf97aa11a"],
+Cell[118706, 2685, 18786, 414, 184, "Output", "ExpressionUUID" -> \
+"18609dad-3098-4f51-ac09-229d2c464cb9"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[137529, 3104, 238, 5, 30, "Input", "ExpressionUUID" -> \
+"531e4610-e4dd-4e32-8f09-d3ab56f3d8e9"],
+Cell[137770, 3111, 13154, 290, 123, "Output", "ExpressionUUID" -> \
+"03a811b8-eb64-44a1-b165-f0b78b051070"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[150961, 3406, 193, 4, 30, "Input", "ExpressionUUID" -> \
+"3d04c3f1-6d72-48f7-b66a-d5be7c7c56f3"],
+Cell[151157, 3412, 13472, 294, 175, "Output", "ExpressionUUID" -> \
+"668c8cda-a0eb-405d-bcbb-19a097960e6e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[164666, 3711, 191, 4, 30, "Input", "ExpressionUUID" -> \
+"76906d6e-c359-4d9b-a50c-fc7f9c37a237"],
+Cell[164860, 3717, 147, 4, 30, "Output", "ExpressionUUID" -> \
+"ee03edab-ed46-48a6-bc09-37e05c153dd3"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[165044, 3726, 190, 4, 30, "Input", "ExpressionUUID" -> \
+"b3a9c6d3-0870-4dc1-9fca-48f9e34d6257"],
+Cell[165237, 3732, 149, 4, 30, "Output", "ExpressionUUID" -> \
+"848f5380-c5cc-44ab-bf4b-837e030bc6b0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[165423, 3741, 194, 4, 30, "Input", "ExpressionUUID" -> \
+"f0c1a84d-4bd3-4f0d-ae67-36653ef86e68"],
+Cell[165620, 3747, 149, 4, 30, "Output", "ExpressionUUID" -> \
+"329c2b30-f73f-4c27-9099-9f9b44d15195"]
+}, Open  ]],
+Cell[165784, 3754, 190, 4, 30, "Input", "ExpressionUUID" -> \
+"f674202b-5187-4b32-9612-66d10df033eb"],
+Cell[CellGroupData[{
+Cell[165999, 3762, 2372, 55, 50, "Input", "ExpressionUUID" -> \
+"b50e6c8c-3b0d-4bdb-ba03-6c44e2b7bf0d"],
+Cell[168374, 3819, 2531, 43, 187, "Output", "ExpressionUUID" -> \
+"a7c4dc76-78da-4c56-b46d-fa39251220c5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[170942, 3867, 1601, 44, 50, "Input", "ExpressionUUID" -> \
+"9cb21156-6b04-4302-91a7-a4a932fe8700"],
+Cell[172546, 3913, 3386, 65, 1415, "Output", "ExpressionUUID" -> \
+"43cdb180-f868-4f83-bce2-edacb4420bde"]
+}, Open  ]]
+}
+]
+*)
+
