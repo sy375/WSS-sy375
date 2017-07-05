@@ -1,5 +1,8 @@
 # sy375
 Wolfram Summer School 2017
+===================
+Sung Min Yoon sy375@cornell.edu
+
 Goal of the Project
 ===================
 ![Feedback Shift Register][1]
