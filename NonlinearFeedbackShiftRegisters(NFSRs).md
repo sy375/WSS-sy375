@@ -1,4 +1,3 @@
-# sy375
 Wolfram Summer School 2017
 ===================
 Sung Min Yoon sy375@cornell.edu
